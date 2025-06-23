@@ -1,0 +1,8 @@
+- page qui affiche la liste des departements (index puisque premier page) ok
+  - creer une fonction qui affiche tous les departements de la base employees et de la table departments ok
+  - il faudra des div qui s'auto-fill si l'ecran est trop petit ok
+- page qui affiche la liste des clients d'un departement
+  - on envoie le numero du departements du lien du departement puis on 'get' ce numero
+  - puis on doit creer une fonction qui affiche les clients d'un departement avec son numero comme parametre
+  - on doit donc selectionner de la table dept_manager:
+  - la requete: select employees.first_name, employees.last_name on dept_manager join employees on dept_manager.emp_no = employees.emp_no where dept_no = '%s'; 
