@@ -35,4 +35,27 @@
             <?php
         }
     }
+        function managerDepartements($bd)
+    {
+        $request = " select * from departments join (select * from dept_manager where to_date > now()) as activeManagers on activeManagers.dept_no = departments.dept_no join employees on activeManagers.emp_no = employees.emp_no;";
+        $query = mysqli_query($bd, $request);
+        ?>
+        <div class="BigBox">
+        <div class="row">
+                <div class="col-6">Department name</div>
+                <div class="col-6">Manager's full name</div>
+            </div>
+        <?php
+        while($data = mysqli_fetch_assoc($query))
+        {
+            ?>
+        <div class="row">
+                <div class="col-6"><?php echo $data['dept_name']; ?></div> 
+                <div class="col-6"><?php echo $data['first_name']; echo " ";echo $data ['last_name']; ?></div> 
+            </div>
+
+            <?php
+        }?></div><?php
+       
+    }
 ?>
