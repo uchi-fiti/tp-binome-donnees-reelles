@@ -167,6 +167,7 @@
         </select>
         <?php
     }
+    
     // function dateMoins18Ans($date) {
     //     $d = new DateTime($date);
     //     $d->modify('-18 years'); // or: $d->sub(new DateInterval('P18Y'));
