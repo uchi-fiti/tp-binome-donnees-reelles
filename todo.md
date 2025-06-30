@@ -6,3 +6,11 @@
   - puis on doit creer une fonction qui affiche les clients d'un departement avec son numero comme parametre
   - on doit donc selectionner de la table dept_manager:
   - la requete: select employees.first_name, employees.last_name on dept_manager join employees on dept_manager.emp_no = employees.emp_no where dept_no = '%s'; 
+- page qui affiche la fiche de l'employe
+    - dtn
+    - firstname
+    - lastname
+    - sexe
+    - hire date
+    - historique du salaire
+    - emploi occupe
