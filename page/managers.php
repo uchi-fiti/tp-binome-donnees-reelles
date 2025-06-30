@@ -8,11 +8,13 @@
     <title>Document</title>
 </head>
 <body>
+    <div class="container my-4">
     <?php 
     require("../inc/connexion.php");
     require("../inc/function.php");
     $bd = connectionbd();
     managerDepartements($bd);
      ?>
+     </div>
 </body>
 </html>

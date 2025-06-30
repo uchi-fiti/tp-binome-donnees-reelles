@@ -10,7 +10,7 @@
                 <div class="col">
                     <div class="card text-center bg-light" style="height: 200px;">
                         <div class="card-body d-flex align-items-center justify-content-center">
-                        <?php echo $dep['dept_no'], ": ";?>
+                        <!-- <?php echo $dep['dept_no'], ": ";?> -->
                         <?php echo $dep['dept_name'];?> 
                         </div>
                     </div>
@@ -27,35 +27,37 @@
         while($cli = mysqli_fetch_assoc($a))
         {
             ?>
-            <div class="col">
-                <div class="card text-center" style="height: 50px">
-                    <p><?php echo $cli['first_name'], " ", $cli['last_name'];;?></p>
+            <div class="col g-3" style="width: 100vw;">
+                <div class="card text-center bg-light pt-3">
+                    <p style="text-align: center;"><?php echo $cli['first_name'], " ", $cli['last_name'];;?></p>
                 </div>
             </div>
             <?php
         }
     }
-        function managerDepartements($bd)
+    function managerDepartements($bd)
     {
         $request = " select * from departments join (select * from dept_manager where to_date > now()) as activeManagers on activeManagers.dept_no = departments.dept_no join employees on activeManagers.emp_no = employees.emp_no;";
         $query = mysqli_query($bd, $request);
         ?>
-        <div class="BigBox">
-        <div class="row">
-                <div class="col-6">Department name</div>
-                <div class="col-6">Manager's full name</div>
-            </div>
+        <table class="table table-hover">
+        <tr>
+            <th>Department name</th>
+            <th>Manager</th>
+        </tr>
         <?php
         while($data = mysqli_fetch_assoc($query))
         {
             ?>
-        <div class="row">
-                <div class="col-6"><?php echo $data['dept_name']; ?></div> 
-                <div class="col-6"><?php echo $data['first_name']; echo " ";echo $data ['last_name']; ?></div> 
-            </div>
+                <tr>
+                    <td><?php echo $data['dept_name']; ?></div> </td>
+                    <td><?php echo $data['first_name']; echo " ";echo $data ['last_name']; ?> </td>
+                </tr>
 
             <?php
-        }?></div><?php
+        }?>
+        </table>
+        <?php
        
     }
 ?>
