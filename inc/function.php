@@ -149,4 +149,27 @@
         </table>
         <?php
     }
+    function choixDepartements($bd)
+    { 
+      $request = "select * from departments;";
+      $query = mysqli_query($bd, $request);
+      ?>
+      <select id="departement" name="departement">  
+      <option value="tous"> Tout les departements </option>
+        <?php  while($data=mysqli_fetch_assoc($query))
+        {
+            ?>
+             <option value="<?php echo htmlspecialchars($data['dept_name']); ?>"><?php echo $data['dept_name']; ?> </option>
+            <?php
+        }
+        
+        ?>
+        </select>
+        <?php
+    }
+    // function dateMoins18Ans($date) {
+    //     $d = new DateTime($date);
+    //     $d->modify('-18 years'); // or: $d->sub(new DateInterval('P18Y'));
+    //     return $d->format('Y-m-d');
+    // }
 ?>
