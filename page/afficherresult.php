@@ -38,7 +38,6 @@ error_reporting(E_ALL);
     }
     if(isset($_SESSION['ageMin']) && $_SESSION['ageMin'] != "")
     {
-        
         $add = " and employees.birth_date >= DATE_SUB(CURDATE(), INTERVAL ".$_SESSION['ageMin']." YEAR)";
         $rcount .= $add;
         $request .= $add;
