@@ -81,9 +81,9 @@ error_reporting(E_ALL);
             <?php $count = $count + 1;
         }
     }
-        if($count < 5)
+        if($count < 20)
         {
-            for($i = 0; $i < (5 - $count); $i++)
+            for($i = 0; $i < (20 - $count); $i++)
             {
                 ?>
             <tr>
