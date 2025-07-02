@@ -47,6 +47,7 @@
         <tr>
             <th>Department name</th>
             <th>Manager</th>
+             <th>Number of employees</th>
             <th>Tableau</th>
         </tr>
         <?php
@@ -56,7 +57,8 @@
                 <tr>
                     <td><a href="page/employees.php?dept_no=<?php echo $data['dept_no'];?>&dept=<?php echo $data['dept_name'];?>"><?php echo $data['dept_name']; ?></a> </td>
                     <td><?php echo $data['first_name']; echo " ";echo $data ['last_name']; ?> </td>
-                    <td>
+                  <td><?php echo " ".nbEmpDept($bd,$data['dept_name'])." employees";?></td>
+                  <td>
                     <a href="page/tableau.php?dept_no=<?php echo $data['dept_no'];?>">
                         Voir le tableau de cet emploi
                     </a>
@@ -66,6 +68,16 @@
         }?>
         </table>
         <?php
+    }
+    function nbEmpDept($bd, $dept)
+    {
+        $request = "select count(*) as count from employees join dept_emp on dept_emp.emp_no = employees.emp_no join departments on departments.dept_no = dept_emp.dept_no where dept_name like '%".$dept."%'";
+        $query = mysqli_query($bd,$request );
+        if($data = mysqli_fetch_assoc($query))
+        {
+            return $data['count'];
+        }
+        return 0;
     }
     function afficherFicheEmployee($bd, $id_emp)
     {
