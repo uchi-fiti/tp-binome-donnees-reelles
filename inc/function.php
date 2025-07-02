@@ -21,7 +21,7 @@
     }
     function afficheremployees($bd, $dept_no)
     {
-        $req = 'select * from dept_manager join employees on dept_manager.emp_no = employees.emp_no join departments on dept_manager.dept_no = departments.dept_no where dept_manager.dept_no = "%s";';
+        $req = 'select * from dept_emp join employees on dept_emp.emp_no = employees.emp_no join departments on dept_emp.dept_no = departments.dept_no where dept_emp.dept_no = "%s";';
         $req = sprintf($req, $dept_no);
         $a = mysqli_query($bd, $req);
 
@@ -47,6 +47,7 @@
         <tr>
             <th>Department name</th>
             <th>Manager</th>
+            <th>Number of employees</th>
         </tr>
         <?php
         while($data = mysqli_fetch_assoc($query))
@@ -55,11 +56,22 @@
                 <tr>
                     <td><a href="page/employees.php?dept_no=<?php echo $data['dept_no'];?>&dept=<?php echo $data['dept_name'];?>"><?php echo $data['dept_name']; ?></a> </td>
                     <td><?php echo $data['first_name']; echo " ";echo $data ['last_name']; ?> </td>
+                    <td><?php echo " ".nbEmpDept($bd,$data['dept_name'])." employees";?></td>
                 </tr>
             <?php
         }?>
         </table>
         <?php
+    }
+    function nbEmpDept($bd, $dept)
+    {
+        $request = "select count(*) as count from employees join dept_emp on dept_emp.emp_no = employees.emp_no join departments on departments.dept_no = dept_emp.dept_no where dept_name like '%".$dept."%'";
+        $query = mysqli_query($bd,$request );
+        if($data = mysqli_fetch_assoc($query))
+        {
+            return $data['count'];
+        }
+        return 0;
     }
     function afficherFicheEmployee($bd, $id_emp)
     {
