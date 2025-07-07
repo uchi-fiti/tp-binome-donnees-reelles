@@ -47,7 +47,8 @@
         <tr>
             <th>Department name</th>
             <th>Manager</th>
-            <th>Number of employees</th>
+             <th>Number of employees</th>
+            <th>Tableau</th>
         </tr>
         <?php
         while($data = mysqli_fetch_assoc($query))
@@ -56,7 +57,12 @@
                 <tr>
                     <td><a href="page/employees.php?dept_no=<?php echo $data['dept_no'];?>&dept=<?php echo $data['dept_name'];?>"><?php echo $data['dept_name']; ?></a> </td>
                     <td><?php echo $data['first_name']; echo " ";echo $data ['last_name']; ?> </td>
-                    <td><?php echo " ".nbEmpDept($bd,$data['dept_name'])." employees";?></td>
+                  <td><?php echo " ".nbEmpDept($bd,$data['dept_name'])." employees";?></td>
+                  <td>
+                    <a href="page/tableau.php?dept_no=<?php echo $data['dept_no'];?>">
+                        Voir le tableau de cet emploi
+                    </a>
+                    </td>
                 </tr>
             <?php
         }?>
@@ -167,7 +173,7 @@
       $query = mysqli_query($bd, $request);
       ?>
       <select id="departement" name="departement">  
-      <option value="tous"> Tout les departements </option>
+      <option value="tous"> Tous les departements </option>
         <?php  while($data=mysqli_fetch_assoc($query))
         {
             ?>

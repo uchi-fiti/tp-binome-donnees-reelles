@@ -14,13 +14,16 @@
     <div class="form-container">
       <h2>Fiche de recherche d'employes</h2>
     <form action="traiterecherche.php" method = "get">
-      <label for="nom">Nom :</label>
+      <label for="nom">Nom :</label> 
+      <!-- Nom ou partie du nom a rechercher -->
       <input type="text" id="nom" name="nom" placeholder="Entrez un nom">
 
       <label for="age-min">Age minimum :</label>
+      <!-- Possible vide -->
       <input type="number" id="age-min" name="age_min" min="0" placeholder="Min">
 
       <label for="age-max">Age maximum :</label>
+      <!-- Possible vide -->
       <input type="number" id="age-max" name="age_max" min="0" placeholder="Max">
 
       <label for="departement">Département :</label>
