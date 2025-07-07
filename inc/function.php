@@ -21,7 +21,7 @@
     }
     function afficheremployees($bd, $dept_no)
     {
-        $req = 'select * from dept_emp join employees on dept_emp.emp_no = employees.emp_no join departments on dept_emp.dept_no = departments.dept_no where dept_emp.dept_no = "%s";';
+        $req = 'select * from v_departments_employees where dept_no = "%s";';
         $req = sprintf($req, $dept_no);
         $a = mysqli_query($bd, $req);
 
@@ -40,7 +40,7 @@
     }
     function managerDepartements($bd)
     {
-        $request = " select * from departments join (select * from dept_manager where to_date > now()) as activeManagers on activeManagers.dept_no = departments.dept_no join employees on activeManagers.emp_no = employees.emp_no;";
+        $request = "select * from v_departments_manager where to_date > now();";
         $query = mysqli_query($bd, $request);
         ?>
         <table class="table table-hover">
@@ -60,7 +60,7 @@
                   <td><?php echo " ".nbEmpDept($bd,$data['dept_name'])." employees";?></td>
                   <td>
                     <a href="page/tableau.php?dept_no=<?php echo $data['dept_no'];?>">
-                        Voir le tableau de cet emploi
+                        Voir...
                     </a>
                     </td>
                 </tr>
@@ -69,9 +69,14 @@
         </table>
         <?php
     }
+    function creerTableau($bd, $dept_no)
+    {
+        $request1_ = 'select count(*), dept_no from v_departments_employees_female as cf join (select count(*), dept_no from v_departments_employees_male) as cm on cf.dept_no = cm.dept_no;';
+    }
     function nbEmpDept($bd, $dept)
     {
-        $request = "select count(*) as count from employees join dept_emp on dept_emp.emp_no = employees.emp_no join departments on departments.dept_no = dept_emp.dept_no where dept_name like '%".$dept."%'";
+        // $request = "select count(*) as count from employees join dept_emp on dept_emp.emp_no = employees.emp_no join departments on departments.dept_no = dept_emp.dept_no where dept_name like '%".$dept."%'";
+        $request = "select count(*) as count from v_departments_employees where dept_name like '%".$dept."%'";
         $query = mysqli_query($bd,$request );
         if($data = mysqli_fetch_assoc($query))
         {
@@ -82,10 +87,8 @@
     function afficherFicheEmployee($bd, $id_emp)
     {
         $req = 'select * from employees where emp_no = %d;';
-        $req2 = 'select * from salaries join employees on salaries.emp_no = employees.emp_no 
-        where salaries.emp_no = %d;';
-        $req3 = 'select * from dept_emp join departments on dept_emp.dept_no = departments.dept_no 
-        where emp_no = %d;';
+        $req2 = 'select * from v_employees_salaries where emp_no = %d;';
+        $req3 = 'select * from v_departments_employees where emp_no = %d';
 
         $req = sprintf($req, $id_emp);
         $req2 = sprintf($req2, $id_emp);
