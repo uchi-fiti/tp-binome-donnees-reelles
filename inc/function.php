@@ -21,7 +21,7 @@
     }
     function afficheremployees($bd, $dept_no)
     {
-        $req = 'select * from dept_emp join employees on dept_emp.emp_no = employees.emp_no join departments on dept_emp.dept_no = departments.dept_no where dept_emp.dept_no = "%s";';
+        $req = 'select * from dept_emp join employees on dept_emp.emp_no = employees.emp_no join departments on dept_emp.dept_no = departments.dept_no where dept_emp.dept_no = "%s" order by first_name asc;';
         $req = sprintf($req, $dept_no);
         $a = mysqli_query($bd, $req);
 
