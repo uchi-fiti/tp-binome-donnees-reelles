@@ -13,10 +13,11 @@
         require("../inc/connexion.php");
         require("../inc/function.php");
     ?>
+        
     <?php 
         $bd = connectionbd();
         $id_emp = $_GET['emp_no'];
         afficherFicheEmployee($bd, $id_emp);
-    ?>
+        ?>
 </body>
 </html>

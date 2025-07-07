@@ -98,6 +98,7 @@
         {
             ?>
             <h3 class="text-center">Fiche de l'employe</h3>
+            <a href="changeDepartement.php?idempl=<?php echo $id_emp; ?>">Changer de departement</a>
             <table class="table table-hover text-center">
             <tr>
                 <th>First name</th>
@@ -165,6 +166,7 @@
         }
         ?>
         </table>
+
         <?php
     }
     function choixDepartements($bd)
@@ -185,7 +187,33 @@
         </select>
         <?php
     }
+    function choixDepartementsUnique($bd)
+    { 
+      $request = "select * from departments;";
+      $query = mysqli_query($bd, $request);
+      ?>
+      <select id="departement" name="departement">  
+        <?php  while($data=mysqli_fetch_assoc($query))
+        {
+            ?>
+             <option value="<?php echo htmlspecialchars($data['dept_name']); ?>"><?php echo $data['dept_name']; ?> </option>
+            <?php
+        }
+        
+        ?>
+        </select>
+        <?php
+    }
     
+function departementNo($bd, $deptname)
+{
+    $request = "select * from departments where dept_name like '%".$deptname."%';";
+    $query = mysqli_query($bd, $request);
+    if($data= mysqli_fetch_assoc($query))
+    {
+        return $data['dept_no'];
+    }
+}
     // function dateMoins18Ans($date) {
     //     $d = new DateTime($date);
     //     $d->modify('-18 years'); // or: $d->sub(new DateInterval('P18Y'));
